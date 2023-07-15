@@ -1,14 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Input } from "../components/Input";
 
-const login = () => {
+export default function Login({}) {
   return (
-    <View>
-      <Text>welcome on login screen</Text>
+    <View style={styles.form}>
+      <Input />
+      <Input />
     </View>
   );
-};
+}
 
-export default login;
-
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  form: {
+    padding: 10,
+  },
+});

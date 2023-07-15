@@ -1,14 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-
-const theme = () => {
-  return (
-    <View>
-      <Text>theme</Text>
-    </View>
-  );
+const colors = {
+  primary: "#DB3022",
+  secondary: "#2A3541", // A darker shade of primary color
+  accentColor: "#FFD700", // A complementary or contrasting color
+  black: "#000000",
+  white: "#FFFFFF",
+  danger: "red",
+  success: "green",
 };
 
-export default theme;
-
-const styles = StyleSheet.create({});
+export { colors };
