@@ -1,3 +1,3 @@
-export { Header } from "./header";
-export { Button } from "./button";
-export { Input } from "./input";
+export { Header } from "./Header";
+export { Button } from "./Button";
+export { Input } from "./Input";

@@ -1,19 +1,15 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../utils/theme";
 
-function Header({ headingText, showBackBtn = true }) {
+function Header({ headingText }) {
   return (
     <View style={styles.container}>
-      {showBackBtn === true && (
-        <TouchableOpacity onPress={onBackBtnPress}>
-          <Ionicons name={"arrow-back"} color={colors.black} size={25} />
-        </TouchableOpacity>
-      )}
-      <View style={styles.textCon}>
-        <Text style={styles.headingText}>{headingText}</Text>
-      </View>
+      <TouchableOpacity>
+        <Ionicons name={"arrow-back"} color={colors.black} size={25} />
+      </TouchableOpacity>
+      <Text style={styles.headingText}>{headingText}</Text>
     </View>
   );
 }
@@ -24,16 +20,13 @@ const styles = StyleSheet.create({
     height: 100,
     marginTop: 20,
     justifyContent: "space-evenly",
-    paddingLeft: 10,
+    paddingLeft:10
   },
-  textCon: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
+
   headingText: {
     fontSize: 25,
-    fontweight: "500",
+    fontWeight: "500",
   },
 });
+
 export { Header };

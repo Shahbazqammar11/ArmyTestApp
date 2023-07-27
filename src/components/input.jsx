@@ -2,12 +2,24 @@ import { View, StyleSheet, TextInput, Text } from "react-native";
 import React from "react";
 import { colors } from "../utils/theme";
 
-function Input({ inputTitle }) {
+function Input({ 
+  inputTitle,
+  onChangeText,
+  
+  keyboardType,
+   
+}) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}> {inputTitle} </Text>
-
-      <TextInput />
+      <View style={styles.inputSubCon}>
+      <TextInput
+            onChangeText={onChangeText}
+            style={styles.input}
+            
+            keyboardType={keyboardType}
+          />
+</View>
     </View>
   );
 }
@@ -27,6 +39,15 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: colors.secondary,
   },
+  input: {
+    width: "95%",
+  },
+  inputSubCon: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+
 });
 
 export { Input };
