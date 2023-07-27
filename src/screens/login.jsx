@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Input } from "../components/Input";
-import { Header } from "../components/Header";
+import { Header, Input } from "../components";
 
 export default function Login({}) {
   return (
