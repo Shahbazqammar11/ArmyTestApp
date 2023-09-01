@@ -9,6 +9,6 @@ const playground = () => {
   )
 }
 
-export default playground
+export default playground;
 
 const styles = StyleSheet.create({})
