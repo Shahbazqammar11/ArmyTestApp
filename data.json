@@ -14,7 +14,7 @@
       "option2": "Jalil Abbas jilani",
       "option3": "Anwaarul Haq Kakar",
       "option4": "None of These",
-    "CorrectOption": "3",
+    "CorrectOption": "4",
     "Category": "navy"
   },
   {
@@ -51,7 +51,7 @@
       "option3": "75 years",
       "option4": "77 years",
     "CorrectOption": "2",
-    "Category": "police"
+    "Category": "airforce"
   },
   {
     "Question": "Who signed the summary to dissolve the Provincial Assembly of Balochistan on 12th August 2023?",
@@ -60,7 +60,7 @@
       "option3": "Governor Malik Abdul Wali Khan Kakar",
       "option4": "None of these",
     "CorrectOption": "3",
-    "Category": "police"
+    "Category": "airforce"
   },
   {
     "Question": "Under which article Governor Wali Kakar approved the dissolution of the provincial assembly of Balochistan?",
@@ -68,7 +68,7 @@
       "option2": "Article 115(1)",
       "option3": "Article 112(1)",
       "option4": "None of These",
-    "CorrectOption": "2",
+    "CorrectOption": "4",
     "Category": "navy"
   },
   {
@@ -87,7 +87,7 @@
       "option3": "August 8th 2023",
       "option4": "None of These",
     "CorrectOption": "2",
-    "Category": "police"
+    "Category": "airforce"
   }
 ]
 
