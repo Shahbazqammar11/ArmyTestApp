@@ -39,14 +39,13 @@ export default function Playground({ route }) {
     setQuestions(shuffleQuestions.slice(0, 10));
   };
 
-  const handleOptionSelect = (questionIndex, option) => {
-   
-      setSelectedOptions({
-        ...selectedOptions,
-        [questionIndex]: option,
-      });
-     
+  const handleOptionSelect = (questionIndex, selectedOption) => {
+    setSelectedOptions({
+      ...selectedOptions,
+      [questionIndex]: selectedOption,
+    });
   };
+  
   
 
   const handleSubmit = () => {
@@ -58,14 +57,17 @@ export default function Playground({ route }) {
     }
     let correctAnswers = 0;
     questions.forEach((question, index) => {
-      if (selectedOptions[index] === question.correctOption) {
+      const correctOption = question.CorrectOption; 
+     
+      if (selectedOptions[index] === correctOption) {
         correctAnswers++;
       }
     });
-
+  
     setScore(correctAnswers);
     setShowResults(true);
     setAttemptedSubmit(true); 
+   
   };
 
   return (
@@ -186,14 +188,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#949494',
     // Adjust styles for selected option
   },
-  correctOption: {
-    backgroundColor: 'green',
-    // Adjust styles for correct option
-  },
-  wrongOption: {
-    backgroundColor: 'red',
-    // Adjust styles for wrong option
-  },
+ 
+
   submitButton: {
     backgroundColor: 'blue',
     alignItems: 'center',
