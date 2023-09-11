@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react
 import React, { useState, useEffect } from 'react';
 import {collection, getDocs, where, query } from "firebase/firestore";
 import { firebase,firestore} from '../services/db';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 export default function Playground({ route }) {
@@ -10,6 +11,7 @@ export default function Playground({ route }) {
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const { category } = route.params  
 
@@ -19,26 +21,28 @@ export default function Playground({ route }) {
   }, [category]);
 
   const getQuestions = async (category) => {
-  
+    
     setSelectedOptions({});
     setShowResults(false);
    
     
-    
+    setLoading(true);
     const q = query(collection(firestore, "questions"), where("Category", "==", category));
     const snapshot = await getDocs(q);
-   
+    
 
     if (snapshot.empty) {
       console.log('No matching data....');
       return;
+      
     }
-
+    
     const allQuestions = snapshot.docs.map(doc => doc.data());
     const shuffleQuestions = allQuestions.sort(() => 0.5 - Math.random());
     setQuestions(shuffleQuestions.slice(0, 10));
+    setLoading(false);
   };
-
+  
   const handleOptionSelect = (questionIndex, selectedOption) => {
     setSelectedOptions({
       ...selectedOptions,
@@ -142,7 +146,7 @@ export default function Playground({ route }) {
     </TouchableOpacity>
   </View>
 )}
-
+<Spinner visible={loading} />
     </View>
   );
 }
