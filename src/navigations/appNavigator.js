@@ -14,7 +14,7 @@ function AppNavigator() {
       <Stack.Navigator>
       <Stack.Screen name="Index" component={Index} />
       <Stack.Screen name="Playground" component={Playground} />
-       
+     
         
       </Stack.Navigator>
     </NavigationContainer>
