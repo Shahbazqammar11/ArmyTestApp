@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import { collection, getDocs, where, query } from "firebase/firestore";
-import { firebase, firestore } from '../services/db';
-import { useNavigation } from '@react-navigation/native';
+import {  firestore } from '../services/db';
+
 import Spinner from 'react-native-loading-spinner-overlay';
+
 
 export default function Playground({ route }) {
   const [questions, setQuestions] = useState([]);
@@ -15,6 +16,8 @@ export default function Playground({ route }) {
   const [userSubmitted, setUserSubmitted] = useState(false);
   const [correctOptions, setCorrectOptions] = useState([]);
   const [incorrectOptions, setIncorrectOptions] = useState([]);
+ 
+
 
   const { category } = route.params;
 
@@ -26,20 +29,31 @@ export default function Playground({ route }) {
     setSelectedOptions({});
     setShowResults(false);
     setLoading(true);
+    setUserSubmitted(false); // Reset userSubmitted to false
+    setCorrectOptions([]);
+    setIncorrectOptions([]);
+    
     const q = query(collection(firestore, "questions"), where("Category", "==", category));
     const snapshot = await getDocs(q);
-
+  
     if (snapshot.empty) {
       console.log('No matching data....');
+      setLoading(false); // Make sure to reset loading state
       return;
     }
-
+  
     const allQuestions = snapshot.docs.map(doc => doc.data());
     const shuffleQuestions = allQuestions.sort(() => 0.5 - Math.random());
     setQuestions(shuffleQuestions.slice(0, 10));
     setLoading(false);
   };
-
+  
+  const handleTryAgain = () => {
+    getQuestions(category);
+    setScore(0);
+    setAttemptedSubmit(false);
+  };
+  
   const handleOptionSelect = (questionIndex, selectedOption) => {
     setSelectedOptions({
       ...selectedOptions,
@@ -72,12 +86,16 @@ export default function Playground({ route }) {
 
     setScore(correctAnswers);
     setAttemptedSubmit(true);
+   
     setShowResults(true);
     setUserSubmitted(true); // Mark that the user has submitted
 
     // Store correct and incorrect options in the state
     setCorrectOptions(correctOptionsArray);
     setIncorrectOptions(incorrectOptionsArray);
+        // Trigger the confetti explosion when the user submits
+        
+    
   };
 
   return (
@@ -141,16 +159,21 @@ export default function Playground({ route }) {
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit} disabled={showResults}>
         <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
+     
+
       {showResults && (
         <View style={styles.result}>
           <Text style={styles.resultText}>
             Your score: {score} out of {questions.length}
           </Text>
-          <TouchableOpacity style={styles.tryAgainButton} onPress={getQuestions}>
-            <Text style={styles.tryAgainButtonText}>Try Again</Text>
-          </TouchableOpacity>
+          <TouchableOpacity style={styles.tryAgainButton} onPress={handleTryAgain}>
+          <Text style={styles.tryAgainButtonText}>Try Again</Text>
+        </TouchableOpacity>
+   
         </View>
       )}
+      
+      
       <Spinner visible={loading} />
     </View>
   );
